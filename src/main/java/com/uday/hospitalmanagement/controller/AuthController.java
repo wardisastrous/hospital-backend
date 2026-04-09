@@ -3,10 +3,10 @@ package com.uday.hospitalmanagement.controller;
 import org.springframework.web.bind.annotation.*;
 import com.uday.hospitalmanagement.util.JwtUtil;
 import com.uday.hospitalmanagement.entity.User;
-@CrossOrigin(origins = "http://localhost:5173")
+
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")   // ✅ ONLY ONE (fixes CORS)
 public class AuthController {
 
     private final JwtUtil jwtUtil;
@@ -18,10 +18,13 @@ public class AuthController {
     @PostMapping("/login")
     public String login(@RequestBody User user) {
 
-        if(user.getUsername().equals("admin") && user.getPassword().equals("admin123")) {
+        if ("admin".equals(user.getUsername()) &&
+            "admin123".equals(user.getPassword())) {
+
             return jwtUtil.generateToken(user.getUsername());
         }
 
         throw new RuntimeException("Invalid credentials");
     }
 }
+
