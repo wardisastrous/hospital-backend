@@ -6,6 +6,7 @@ import com.uday.hospitalmanagement.entity.User;
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     private final JwtUtil jwtUtil;
