@@ -3,6 +3,7 @@ package com.uday.hospitalmanagement.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "users")   // ✅ VERY IMPORTANT FIX
 public class User {
 
     @Id
