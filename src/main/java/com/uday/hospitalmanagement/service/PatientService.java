@@ -1,26 +1,29 @@
 package com.uday.hospitalmanagement.service;
 
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.uday.hospitalmanagement.entity.Patient;
+import com.uday.hospitalmanagement.repository.PatientRepository;
 
 @Service
 public class PatientService {
 
-    private final List<Patient> patients = new ArrayList<>();
+    private final PatientRepository repo;
+
+    public PatientService(PatientRepository repo) {
+        this.repo = repo;
+    }
 
     public List<Patient> getAllPatients() {
-        return patients;
+        return repo.findAll();
     }
 
     public Patient savePatient(Patient patient) {
-        patients.add(patient);
-        return patient;
+        return repo.save(patient);
     }
 
     public void deletePatient(Long id) {
-        patients.removeIf(p -> p.getId().equals(id));
+        repo.deleteById(id);
     }
 }
